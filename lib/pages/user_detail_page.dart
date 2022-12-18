@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:user_db_app/data/vos/address_vo.dart';
+import 'package:user_db_app/data/vos/company_vo.dart';
+import 'package:user_db_app/data/vos/user_vo.dart';
 import 'package:user_db_app/resources/colors.dart';
 import 'package:user_db_app/resources/dimens.dart';
+import 'package:user_db_app/resources/strings.dart';
+import 'package:user_db_app/utils/url_launch.dart';
 
 class UserDetailPage extends StatelessWidget {
+  final UserVO? userVo;
+
+  UserDetailPage({required this.userVo});
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -26,10 +35,10 @@ class UserDetailPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Leanne Graham",
+              userVo?.name ?? "",
             ),
             Text(
-              "Sincere@april.biz",
+              userVo?.username ?? "",
               style: TextStyle(
                 color: Colors.white70,
                 fontSize: TEXT_13,
@@ -44,13 +53,14 @@ class UserDetailPage extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: MARGIN_LARGE),
-              MainProfileInfoSectionView(avatarRadius: avatarRadius),
+              MainProfileInfoSectionView(
+                  avatarRadius: avatarRadius, userVo: userVo),
               SizedBox(height: MARGIN_XLARGE),
-              AddressSectionView(),
+              AddressSectionView(addressVo: userVo?.address),
               SizedBox(height: MARGIN_LARGE),
-              WebsiteSectionView(),
+              WebsiteSectionView(webPageUrl: userVo?.website ?? ""),
               SizedBox(height: MARGIN_LARGE),
-              CompanySectionView(),
+              CompanySectionView(companyVo: userVo?.company),
               SizedBox(height: MARGIN_XLARGE),
             ],
           ),
@@ -61,6 +71,10 @@ class UserDetailPage extends StatelessWidget {
 }
 
 class AddressSectionView extends StatelessWidget {
+  final AddressVO? addressVo;
+
+  AddressSectionView({required this.addressVo});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -82,13 +96,15 @@ class AddressSectionView extends StatelessWidget {
           ),
           child: Column(
             children: [
-              InfoRowView(label: "City", description: "Gwenborough"),
+              InfoRowView(label: "City", description: addressVo?.city ?? ""),
               SizedBox(height: MARGIN_MEDIUM_2),
-              InfoRowView(label: "Street", description: "Kulas Light"),
+              InfoRowView(
+                  label: "Street", description: addressVo?.street ?? ""),
               SizedBox(height: MARGIN_MEDIUM_2),
-              InfoRowView(label: "Suite", description: "Apt. 556"),
+              InfoRowView(label: "Suite", description: addressVo?.suite ?? ""),
               SizedBox(height: MARGIN_MEDIUM_2),
-              InfoRowView(label: "ZipCode", description: "92998-3874"),
+              InfoRowView(
+                  label: "ZipCode", description: addressVo?.zipCode ?? ""),
             ],
           ),
         ),
@@ -98,13 +114,18 @@ class AddressSectionView extends StatelessWidget {
 }
 
 class CompanySectionView extends StatelessWidget {
+  final CompanyVO? companyVo;
+
+  CompanySectionView({required this.companyVo});
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: MARGIN_MEDIUM_2),
-          child: UserDetailTitleView(title: "Company", iconData: Icons.apartment),
+          child:
+              UserDetailTitleView(title: "Company", iconData: Icons.apartment),
         ),
         SizedBox(height: MARGIN_MEDIUM_2),
         Container(
@@ -119,11 +140,13 @@ class CompanySectionView extends StatelessWidget {
           ),
           child: Column(
             children: [
-              InfoRowView(label: "Name", description: "Romaguera-Crona"),
+              InfoRowView(label: "Name", description: companyVo?.name ?? ""),
               SizedBox(height: MARGIN_MEDIUM_2),
-              InfoRowView(label: "Catch Phrase", description: "Multi-layered client-server neural-net"),
+              InfoRowView(
+                  label: "Catch Phrase",
+                  description: companyVo?.catchPhrase ?? ""),
               SizedBox(height: MARGIN_MEDIUM_2),
-              InfoRowView(label: "BS", description: "harness real-time e-markets"),
+              InfoRowView(label: "BS", description: companyVo?.bs ?? ""),
             ],
           ),
         ),
@@ -133,6 +156,10 @@ class CompanySectionView extends StatelessWidget {
 }
 
 class WebsiteSectionView extends StatelessWidget {
+  final String webPageUrl;
+
+  WebsiteSectionView({required this.webPageUrl});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -158,7 +185,7 @@ class WebsiteSectionView extends StatelessWidget {
           ),
           child: Column(
             children: [
-              InfoRowView(label: "Website", description: "hildegard.org"),
+              InfoRowView(label: "Website", description: webPageUrl),
             ],
           ),
         ),
@@ -207,8 +234,11 @@ class UserDetailTitleView extends StatelessWidget {
   final IconData iconData;
   final bool isWeb;
 
-  UserDetailTitleView(
-      {required this.title, required this.iconData, this.isWeb = false});
+  UserDetailTitleView({
+    required this.title,
+    required this.iconData,
+    this.isWeb = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -235,11 +265,14 @@ class UserDetailTitleView extends StatelessWidget {
         ),
         Visibility(
           visible: isWeb,
-          child: Text(
-            "Lauch Web",
-            style: TextStyle(
-              color: Colors.blue,
-              decoration: TextDecoration.underline,
+          child: GestureDetector(
+            onTap: () => launchThisUrl("https://google.com"),
+            child: Text(
+              "Lauch Web",
+              style: TextStyle(
+                color: Colors.blue,
+                decoration: TextDecoration.underline,
+              ),
             ),
           ),
         ),
@@ -252,9 +285,11 @@ class MainProfileInfoSectionView extends StatelessWidget {
   const MainProfileInfoSectionView({
     Key? key,
     required this.avatarRadius,
+    required this.userVo,
   }) : super(key: key);
 
   final double avatarRadius;
+  final UserVO? userVo;
 
   @override
   Widget build(BuildContext context) {
@@ -271,21 +306,21 @@ class MainProfileInfoSectionView extends StatelessWidget {
         ),
         SizedBox(height: MARGIN_MEDIUM_2),
         UserInfoTextView(
-          label: "Leanne Graham",
+          label: userVo?.name ?? "",
           color: HOME_SCREEN_PHONE_NUMBER_COLOR,
           fontSize: TEXT_REGULAR_2X,
           fontWeight: FontWeight.w600,
         ),
         SizedBox(height: MARGIN_MEDIUM),
         UserInfoTextView(
-          label: "1-770-736-8031 x56442",
+          label: userVo?.phone ?? "",
           fontSize: TEXT_REGULAR,
           color: Colors.white70,
           fontWeight: FontWeight.w600,
         ),
         SizedBox(height: MARGIN_MEDIUM),
         UserInfoTextView(
-          label: "Sincere@april.biz",
+          label: userVo?.email ?? "",
           fontSize: TEXT_REGULAR,
           color: HOME_SCREEN_PHONE_NUMBER_COLOR,
           fontWeight: FontWeight.w600,

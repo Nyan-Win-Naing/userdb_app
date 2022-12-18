@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:user_db_app/data/vos/user_vo.dart';
 import 'package:user_db_app/resources/colors.dart';
 import 'package:user_db_app/resources/dimens.dart';
 
 class UserView extends StatelessWidget {
+
+  final UserVO? userVo;
+
+
+  UserView({required this.userVo});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -10,7 +17,7 @@ class UserView extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ProfileInfoView(),
+          ProfileInfoView(userVo: userVo),
           Icon(
             Icons.arrow_forward_ios,
             color: Colors.white,
@@ -22,9 +29,10 @@ class UserView extends StatelessWidget {
 }
 
 class ProfileInfoView extends StatelessWidget {
-  const ProfileInfoView({
-    Key? key,
-  }) : super(key: key);
+  final UserVO? userVo;
+
+
+  ProfileInfoView({required this.userVo});
 
   @override
   Widget build(BuildContext context) {
@@ -40,21 +48,21 @@ class ProfileInfoView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 UserInfoTextView(
-                  label: "Leanne Graham",
+                  label: userVo?.name ?? "",
                   color: Colors.white,
                   fontSize: TEXT_REGULAR_2X,
                   fontWeight: FontWeight.w600,
                 ),
                 SizedBox(height: MARGIN_MEDIUM),
                 UserInfoTextView(
-                  label: "1-770-736-8031 x56442",
+                  label: userVo?.phone ?? "",
                   color: HOME_SCREEN_PHONE_NUMBER_COLOR,
                   fontSize: TEXT_REGULAR,
                   fontWeight: FontWeight.w500,
                 ),
                 SizedBox(height: MARGIN_MEDIUM),
                 UserInfoTextView(
-                  label: "Sincere@april.biz",
+                  label: userVo?.email ?? "",
                   color: Colors.white70,
                   fontSize: TEXT_REGULAR,
                   fontWeight: FontWeight.w500,
@@ -85,7 +93,9 @@ class UserInfoTextView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       label,
+      maxLines: 1,
       style: TextStyle(
+        overflow: TextOverflow.ellipsis,
         color: color,
         fontSize: fontSize,
         fontWeight: fontWeight,
