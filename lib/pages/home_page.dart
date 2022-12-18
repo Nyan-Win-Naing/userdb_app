@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
               padding: EdgeInsets.only(right: MARGIN_MEDIUM_2),
               child: GestureDetector(
                 onTap: () => launchThisUrl(MY_PROFILE_URL),
-                child: Icon(
+                child: const Icon(
                   Icons.person,
                   color: Colors.white,
                 ),

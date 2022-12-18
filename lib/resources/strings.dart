@@ -1,2 +1,13 @@
 const APP_TITLE = "UserDB App";
 const MY_PROFILE_URL = "https://drive.google.com/file/d/1d0wxMTp5CwjdZ05I6HFuwK0QBI2Acx9A/view?usp=sharing";
+const ADDRESS_LABEL = "Address";
+const CITY_LABEL = "City";
+const STREET_LABEL = "Street";
+const SUITE_LABEL = "Suite";
+const ZIPCODE_LABEL = "ZipCode";
+const COMPANY_LABEL = "Company";
+const NAME_LABEL = "Name";
+const CATCH_PHRASE_LABEL = "Catch Phrase";
+const BS_LABEL = "BS";
+const WEBSITE_LABEL = "Website";
+const LAUNCH_WEBSITE_LABEL = "Launch Web";

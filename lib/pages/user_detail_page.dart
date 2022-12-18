@@ -39,7 +39,7 @@ class UserDetailPage extends StatelessWidget {
             ),
             Text(
               userVo?.username ?? "",
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white70,
                 fontSize: TEXT_13,
                 fontWeight: FontWeight.w500,
@@ -52,16 +52,16 @@ class UserDetailPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: MARGIN_LARGE),
+              const SizedBox(height: MARGIN_LARGE),
               MainProfileInfoSectionView(
                   avatarRadius: avatarRadius, userVo: userVo),
-              SizedBox(height: MARGIN_XLARGE),
+              const SizedBox(height: MARGIN_XLARGE),
               AddressSectionView(addressVo: userVo?.address),
-              SizedBox(height: MARGIN_LARGE),
+              const SizedBox(height: MARGIN_LARGE),
               WebsiteSectionView(webPageUrl: userVo?.website ?? ""),
-              SizedBox(height: MARGIN_LARGE),
+              const SizedBox(height: MARGIN_LARGE),
               CompanySectionView(companyVo: userVo?.company),
-              SizedBox(height: MARGIN_XLARGE),
+              const SizedBox(height: MARGIN_XLARGE),
             ],
           ),
         ),
@@ -81,12 +81,12 @@ class AddressSectionView extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: MARGIN_MEDIUM_2),
-          child: UserDetailTitleView(title: "Address", iconData: Icons.home),
+          child: UserDetailTitleView(title: ADDRESS_LABEL, iconData: Icons.home),
         ),
-        SizedBox(height: MARGIN_MEDIUM_2),
+        const SizedBox(height: MARGIN_MEDIUM_2),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: MARGIN_MEDIUM_2),
-          padding: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(horizontal: MARGIN_MEDIUM_2),
+          padding: const EdgeInsets.symmetric(
             horizontal: MARGIN_CARD_MEDIUM_2,
             vertical: MARGIN_CARD_MEDIUM_2,
           ),
@@ -96,15 +96,15 @@ class AddressSectionView extends StatelessWidget {
           ),
           child: Column(
             children: [
-              InfoRowView(label: "City", description: addressVo?.city ?? ""),
-              SizedBox(height: MARGIN_MEDIUM_2),
+              InfoRowView(label: CITY_LABEL, description: addressVo?.city ?? ""),
+              const SizedBox(height: MARGIN_MEDIUM_2),
               InfoRowView(
-                  label: "Street", description: addressVo?.street ?? ""),
-              SizedBox(height: MARGIN_MEDIUM_2),
-              InfoRowView(label: "Suite", description: addressVo?.suite ?? ""),
-              SizedBox(height: MARGIN_MEDIUM_2),
+                  label: STREET_LABEL, description: addressVo?.street ?? ""),
+              const SizedBox(height: MARGIN_MEDIUM_2),
+              InfoRowView(label: SUITE_LABEL, description: addressVo?.suite ?? ""),
+              const SizedBox(height: MARGIN_MEDIUM_2),
               InfoRowView(
-                  label: "ZipCode", description: addressVo?.zipCode ?? ""),
+                  label: ZIPCODE_LABEL, description: addressVo?.zipCode ?? ""),
             ],
           ),
         ),
@@ -125,12 +125,12 @@ class CompanySectionView extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: MARGIN_MEDIUM_2),
           child:
-              UserDetailTitleView(title: "Company", iconData: Icons.apartment),
+              UserDetailTitleView(title: COMPANY_LABEL, iconData: Icons.apartment),
         ),
-        SizedBox(height: MARGIN_MEDIUM_2),
+        const SizedBox(height: MARGIN_MEDIUM_2),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: MARGIN_MEDIUM_2),
-          padding: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(horizontal: MARGIN_MEDIUM_2),
+          padding: const EdgeInsets.symmetric(
             horizontal: MARGIN_CARD_MEDIUM_2,
             vertical: MARGIN_CARD_MEDIUM_2,
           ),
@@ -140,13 +140,13 @@ class CompanySectionView extends StatelessWidget {
           ),
           child: Column(
             children: [
-              InfoRowView(label: "Name", description: companyVo?.name ?? ""),
-              SizedBox(height: MARGIN_MEDIUM_2),
+              InfoRowView(label: NAME_LABEL, description: companyVo?.name ?? ""),
+              const SizedBox(height: MARGIN_MEDIUM_2),
               InfoRowView(
-                  label: "Catch Phrase",
+                  label: CATCH_PHRASE_LABEL,
                   description: companyVo?.catchPhrase ?? ""),
-              SizedBox(height: MARGIN_MEDIUM_2),
-              InfoRowView(label: "BS", description: companyVo?.bs ?? ""),
+              const SizedBox(height: MARGIN_MEDIUM_2),
+              InfoRowView(label: BS_LABEL, description: companyVo?.bs ?? ""),
             ],
           ),
         ),
@@ -167,15 +167,15 @@ class WebsiteSectionView extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: MARGIN_MEDIUM_2),
           child: UserDetailTitleView(
-            title: "Website",
+            title: WEBSITE_LABEL,
             iconData: Icons.web_outlined,
             isWeb: true,
           ),
         ),
-        SizedBox(height: MARGIN_MEDIUM_2),
+        const SizedBox(height: MARGIN_MEDIUM_2),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: MARGIN_MEDIUM_2),
-          padding: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(horizontal: MARGIN_MEDIUM_2),
+          padding: const EdgeInsets.symmetric(
             horizontal: MARGIN_CARD_MEDIUM_2,
             vertical: MARGIN_CARD_MEDIUM_2,
           ),
@@ -185,7 +185,7 @@ class WebsiteSectionView extends StatelessWidget {
           ),
           child: Column(
             children: [
-              InfoRowView(label: "Website", description: webPageUrl),
+              InfoRowView(label: WEBSITE_LABEL, description: webPageUrl),
             ],
           ),
         ),
@@ -209,7 +209,7 @@ class InfoRowView extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 1 / 3,
           child: Text(
             "$label : ",
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromRGBO(41, 67, 78, 1.0),
               fontWeight: FontWeight.w500,
             ),
@@ -218,7 +218,7 @@ class InfoRowView extends StatelessWidget {
         Flexible(
           child: Text(
             description,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.blueGrey,
               fontWeight: FontWeight.w500,
             ),
@@ -252,10 +252,10 @@ class UserDetailTitleView extends StatelessWidget {
               color: Colors.white,
               size: MARGIN_MEDIUM_3,
             ),
-            SizedBox(width: MARGIN_MEDIUM),
+            const SizedBox(width: MARGIN_MEDIUM),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white70,
                 fontSize: TEXT_REGULAR_2X,
                 fontWeight: FontWeight.w600,
@@ -267,8 +267,8 @@ class UserDetailTitleView extends StatelessWidget {
           visible: isWeb,
           child: GestureDetector(
             onTap: () => launchThisUrl("https://google.com"),
-            child: Text(
-              "Lauch Web",
+            child: const Text(
+              LAUNCH_WEBSITE_LABEL,
               style: TextStyle(
                 color: Colors.blue,
                 decoration: TextDecoration.underline,
@@ -299,26 +299,26 @@ class MainProfileInfoSectionView extends StatelessWidget {
           child: CircleAvatar(
             radius: avatarRadius,
             backgroundColor: HOME_SCREEN_BACKGROUND_COLOR,
-            backgroundImage: AssetImage(
+            backgroundImage: const AssetImage(
               "assets/profile_placeholder.png",
             ),
           ),
         ),
-        SizedBox(height: MARGIN_MEDIUM_2),
+        const SizedBox(height: MARGIN_MEDIUM_2),
         UserInfoTextView(
           label: userVo?.name ?? "",
           color: HOME_SCREEN_PHONE_NUMBER_COLOR,
           fontSize: TEXT_REGULAR_2X,
           fontWeight: FontWeight.w600,
         ),
-        SizedBox(height: MARGIN_MEDIUM),
+        const SizedBox(height: MARGIN_MEDIUM),
         UserInfoTextView(
           label: userVo?.phone ?? "",
           fontSize: TEXT_REGULAR,
           color: Colors.white70,
           fontWeight: FontWeight.w600,
         ),
-        SizedBox(height: MARGIN_MEDIUM),
+        const SizedBox(height: MARGIN_MEDIUM),
         UserInfoTextView(
           label: userVo?.email ?? "",
           fontSize: TEXT_REGULAR,
